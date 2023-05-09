@@ -1,34 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { dkeeper_backend } from "../../../../../declarations/dkeeper_backend"
 
 function CheckList() {
   const navigate = useNavigate();
 
   const [checkItems, setCheckItems] = useState([
     {
-      label: "高血圧",
-      statuses: ["現在治療中", "経過観察中", "既往症"],
+      diseaseName: "高血圧",
+      statuses: { currentTreatment: false, followUp: false, previousDisease: false },
       age: "24",
-      values: [false, false, false]
     },
     {
-      label: "脂質異常症",
-      statuses: ["現在治療中", "経過観察中", "既往症"],
+      diseaseName: "脂質異常症",
+      statuses: { currentTreatment: false, followUp: false, previousDisease: false },
       age: "",
-      values: [false, false, false]
     },
     {
-      label: "糖尿病",
-      statuses: ["現在治療中", "経過観察中", "既往症"],
+      diseaseName: "糖尿病",
+      statuses: { currentTreatment: true, followUp: false, previousDisease: false },
       age: "",
-      values: [false, false, false]
     }
   ]);
 
   const handleCheckChange = (event) => {
     const [index, field] = event.target.name.split("-");
     const newCheckItems = [...checkItems];
-    newCheckItems[index].values[field] = event.target.checked;
+    if (field == 0) {
+      newCheckItems[index].statuses.currentTreatment = event.target.checked;
+    } else if (field == 1) {
+      newCheckItems[index].statuses.followUp = event.target.checked;
+    } else if (field == 2) {
+      newCheckItems[index].statuses.previousDisease = event.target.checked;
+    }
     setCheckItems(newCheckItems);
   };
 
@@ -41,11 +45,22 @@ function CheckList() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newCheckItems = [...checkItems];
-    setCheckItems(newCheckItems);
+
+    newCheckItems.map((checkItem) => (setCheckItems(dkeeper_backend.createCheckItem(checkItem.num, checkItem.diseaseName, checkItem.statuses, checkItem.age))));
     navigate("/interview-sheet-submitted", {
       state: { checkItems: checkItems }
     });
   };
+
+  useEffect(() => {
+    console.log("useEffedt");
+    fetchData();
+  }, []);
+
+  async function fetchData() {
+    const checkItemArray = await dkeeper_backend.readCheckItem();
+    setCheckItems(checkItemArray);
+  }
 
   return (
     <form method="post" onSubmit={handleSubmit}>
@@ -62,15 +77,15 @@ function CheckList() {
         <tbody>
           {checkItems.map((checkItem, index) => (
             <tr key={index}>
-              <td>{checkItem.label}</td>
-              {checkItem.statuses.map((status, field) => (
+              <td>{checkItem.diseaseName}</td>
+              {Object.values(checkItem.statuses).map((status, field) => (
                 <td key={field}>
                   <label>
                     <input
                       type="checkbox"
                       name={`${index}-${field}`}
-                      value={status}
-                      checked={checkItem.values[field]}
+                      value={Object.values(status)}
+                      checked={status}
                       onChange={handleCheckChange}
                     />
                   </label>
