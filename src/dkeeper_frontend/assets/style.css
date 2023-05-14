@@ -25,18 +25,24 @@ body {
 
 /* 問診票送信メッセージコンテナのスタイル */
 .interview-sheet-submitted {
-    text-align: center;
     margin-bottom: 20px;
 }
 
-.interview-sheet-submitted h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
+.basicInfo label {
+    display: inline-block;
+    text-align: right;
+    width: 70px;
+    margin: 0px 10px;
 }
 
-.interview-sheet-submitted p {
-    font-size: 16px;
-    margin: 0;
+.basicInfo input {
+    width: 200px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 /* フォームのスタイル */
