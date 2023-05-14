@@ -22,7 +22,7 @@ function BasicInfo() {
       <h1>問診票</h1>
       <div className="basicInfo" >
         <p>
-          <label for="corpName">団体名</label>
+          <label htmlFor="corpName">団体名</label>
           <BasicInfoInput
             name="corpName"
             value={corpName}
@@ -31,7 +31,7 @@ function BasicInfo() {
           />
         </p>
         <p>
-          <label for="corpName">個人番号</label>
+          <label htmlFor="corpName">個人番号</label>
           <BasicInfoInput
             name="myNumber"
             value={myNumber}
@@ -40,7 +40,7 @@ function BasicInfo() {
           />
         </p>
         <p>
-          <label for="corpName">名前</label>
+          <label htmlFor="corpName">名前</label>
           <BasicInfoInput
             name="fullName"
             value={fullName}
