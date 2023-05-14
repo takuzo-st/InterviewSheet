@@ -19,29 +19,35 @@ function BasicInfo() {
   };
   return (
     <header>
-      <div>
-        <h1>問診票</h1>
-        <BasicInfoInput
-          name="corpName"
-          value={corpName}
-          placeholder="Works"
-          onChange={handleCorpNameChange}
-          label="団体名"
-        />
-        <BasicInfoInput
-          name="myNumber"
-          value={myNumber}
-          placeholder="0123"
-          onChange={handleMyNumberChange}
-          label="個人番号"
-        />
-        <BasicInfoInput
-          name="fullName"
-          value={fullName}
-          placeholder="山田花子"
-          onChange={handleFullNameChange}
-          label="氏名"
-        />
+      <h1>問診票</h1>
+      <div className="basicInfo" >
+        <p>
+          <label for="corpName">団体名</label>
+          <BasicInfoInput
+            name="corpName"
+            value={corpName}
+            placeholder="Works"
+            onChange={handleCorpNameChange}
+          />
+        </p>
+        <p>
+          <label for="corpName">個人番号</label>
+          <BasicInfoInput
+            name="myNumber"
+            value={myNumber}
+            placeholder="0123"
+            onChange={handleMyNumberChange}
+          />
+        </p>
+        <p>
+          <label for="corpName">名前</label>
+          <BasicInfoInput
+            name="fullName"
+            value={fullName}
+            placeholder="山田花子"
+            onChange={handleFullNameChange}
+          />
+        </p>
       </div>
     </header>
   );
