@@ -5,6 +5,7 @@ import Text "mo:base/Text";
 actor Dkeeper {
 
   public type CheckItem = {
+    number : Nat;
     diseaseName : Text;
     statuses : {
       currentTreatment : Bool;
@@ -17,6 +18,7 @@ actor Dkeeper {
   stable var checkItems : List.List<CheckItem> = List.nil<CheckItem>();
 
   let item1 : CheckItem = {
+    number = 0;
     diseaseName = "高血圧";
     statuses = {
       currentTreatment = true;
@@ -27,6 +29,7 @@ actor Dkeeper {
   };
 
   let item2 : CheckItem = {
+    number = 1;
     diseaseName = "脂質異常症";
     statuses = {
       currentTreatment = false;
@@ -37,6 +40,7 @@ actor Dkeeper {
   };
 
   let item3 : CheckItem = {
+    number = 2;
     diseaseName = "糖尿病";
     statuses = {
       currentTreatment = false;
@@ -62,6 +66,7 @@ actor Dkeeper {
   ) {
 
     let newCheckItem : CheckItem = {
+      number = numNat;
       diseaseName = diseaseNameText;
       statuses = statusList;
       age = ageText;

@@ -7,16 +7,19 @@ function CheckList() {
 
   const [checkItems, setCheckItems] = useState([
     {
+      number: 0,
       diseaseName: "高血圧",
       statuses: { currentTreatment: false, followUp: false, previousDisease: false },
       age: "24",
     },
     {
+      number: 1,
       diseaseName: "脂質異常症",
       statuses: { currentTreatment: false, followUp: false, previousDisease: false },
       age: "",
     },
     {
+      number: 2,
       diseaseName: "糖尿病",
       statuses: { currentTreatment: true, followUp: false, previousDisease: false },
       age: "",
@@ -46,14 +49,13 @@ function CheckList() {
     e.preventDefault();
     const newCheckItems = [...checkItems];
 
-    newCheckItems.map((checkItem) => (setCheckItems(dkeeper_backend.createCheckItem(checkItem.num, checkItem.diseaseName, checkItem.statuses, checkItem.age))));
+    newCheckItems.map((checkItem) => (setCheckItems(dkeeper_backend.createCheckItem(checkItem.number, checkItem.diseaseName, checkItem.statuses, checkItem.age))));
     navigate("/interview-sheet-submitted", {
       state: { checkItems: checkItems }
     });
   };
 
   useEffect(() => {
-    console.log("useEffedt");
     fetchData();
   }, []);
 
